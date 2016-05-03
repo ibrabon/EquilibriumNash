@@ -1,5 +1,8 @@
 import tkinter as tk
 
+import calculations as calc
+
+
 class Application(tk.Frame):
     def __init__(self, master=None):
         tk.Frame.__init__(self, master)
@@ -7,13 +10,20 @@ class Application(tk.Frame):
         self.createWidgets()
 
     def createWidgets(self):
+        self.rqText = tk.StringVar()
         self.rgLabel = tk.Label(self, text="r^g").pack()
-        self.rqText = tk.Text(self, height=1, width=20).pack()
+        self.rqEntry = tk.Entry(self, textvariable=self.rqText).pack()
 
+
+        self.rpText = tk.StringVar()
         self.rpLabel = tk.Label(self, text="r^p").pack()
-        self.rpText = tk.Text(self, height=1, width=20).pack()
+        self.rpEntry = tk.Entry(self, textvariable=self.rpText).pack()
 
-        self.okButton = tk.Button(self, text="Calculate", command=root.destroy).pack()
+        self.okButton = tk.Button(self, text="Calculate", command=self.calculate).pack(side="top")
+
+    def calculate(self):
+        amount = self.rpText.get()
+        return calc.Equilibrium().makeStep(amount)
 
 
 root = tk.Tk()
