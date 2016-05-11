@@ -1,5 +1,5 @@
-governmentTimePeriod = "rg"
-governmentScalarStrategy = "qg"
+GOVERNMENT_TIME_PERIOD = "rg"
+GOVERNMENT_SCALAR_STRATEGY = "qg"
 
-publicTimePeriod = "rp"
-publicScalarStrategy = "qp"
+PUBLIC_TIME_PERIOD = "rp"
+PUBLIC_SCALAR_STRATEGY = "qp"

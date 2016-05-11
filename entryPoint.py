@@ -1,13 +1,7 @@
-import globalConstants
 import nash
 import util
 
-clientInput = util.Util.fromFileToMap(util.Util.parse().filePath)
-
-governmentPeriod = clientInput.get(globalConstants.governmentTimePeriod)
-governmentStrategy = clientInput.get(globalConstants.governmentScalarStrategy)
-publicPeriod = clientInput.get(globalConstants.publicTimePeriod)
-publicStrategy = clientInput.get(globalConstants.publicScalarStrategy)
+ClientInput = util.Util.fromFileToMap(util.Util.parse().filePath)
 
 GovernmentPayoffs = ['Government',
                      ('L', 'L', 0),
@@ -20,6 +14,9 @@ PublicPayoffs = ['Public',
                  ('H', 'L', -1),
                  ('H', 'H', 0)]
 
-nash.method_name(GovernmentPayoffs, PublicPayoffs)
+nash.calculate_nash(GovernmentPayoffs, PublicPayoffs)
+
+for i in range(0, int(util.Util.parse().iterations)):
+    nash.time_scales_game(ClientInput, GovernmentPayoffs, PublicPayoffs)
 
 print(" ")

@@ -1,7 +1,7 @@
 import argparse
 
-class Util:
 
+class Util:
     @staticmethod
     def fromFileToMap(filePath):
         newDict = {}
@@ -15,5 +15,5 @@ class Util:
     def parse():
         parser = argparse.ArgumentParser()
         parser.add_argument('-f', '--filePath', default="files/income.txt")
-        parser.add_argument('-i', '--iterations')
+        parser.add_argument('-i', '--iterations', default=1)
         return parser.parse_args()

@@ -1,16 +1,19 @@
-class player:
-    def __init__(self, name, order, strategySpace, payoffs, choice, suboptimal, strategies, state, gameplay):
+import globalConstants
+
+
+class Player:
+    def __init__(self, name, order, strategy_space, payoffs, choice, suboptimal, strategies, state, game_play):
         self.name = name
         self.order = order
-        self.strategySpace = strategySpace
+        self.strategy_space = strategy_space
         self.payoffs = payoffs
         self.choice = choice
         self.suboptimal = suboptimal
         self.strategies = strategies
         self.state = state
-        self.gameplay = gameplay
+        self.game_play = game_play
 
-    def processGame(self, G):
+    def process_game(self, G):
         for i in range(0, len(G)):
             X = G[i]
             if X[0] == self.name:
@@ -18,15 +21,15 @@ class player:
                     Branch = X[j]
                     Alternative = list(Branch)
                     del Alternative[len(Alternative) - 1]
-                    self.strategySpace = self.strategySpace + [tuple(Alternative)]
+                    self.strategy_space = self.strategy_space + [tuple(Alternative)]
                     self.payoffs = self.payoffs + [Branch[len(Branch) - 1]]
 
     def evaluate(self):
         X = []
-        for i in range(0, len(self.strategySpace)):
-            Alternative1 = self.strategySpace[i]
-            for j in range(0, len(self.strategySpace)):
-                Alternative2 = self.strategySpace[j]
+        for i in range(0, len(self.strategy_space)):
+            Alternative1 = self.strategy_space[i]
+            for j in range(0, len(self.strategy_space)):
+                Alternative2 = self.strategy_space[j]
                 if Alternative1 != Alternative2:
                     if len(Alternative1) == len(Alternative2):
                         Compare = 0
@@ -59,16 +62,16 @@ class player:
             for m in range(0, len(strategy)):
                 O = self.order[m]
                 self.state[O] = strategy[m]
-            self.gameplay = self.gameplay + [tuple(self.state)]
+            self.game_play = self.game_play + [tuple(self.state)]
 
 
-class game:
+class Game:
     def __init__(self, players, structure, optimal):
         self.players = players
         self.structure = structure
         self.optimal = optimal
 
-    def Nash(self, GP):
+    def nash(self, GP):
         Y = set(GP[0])
         for i in range(0, len(GP)):
             X = set(GP[i])
@@ -82,20 +85,41 @@ class game:
             print("\nThis game has no pure strategies Nash equilibrium!")
 
 
-def method_name(GovernmentPayoffs, PublicPayoffs):
+class TimeScaleGame(Game):
+    def __init__(self, players, structure, optimal, government_period, public_period, government_strategy,
+                 public_strategy):
+        super().__init__(players, structure, optimal)
+        self.government_period = government_period
+        self.public_period = public_period
+        self.government_strategy = government_strategy
+        self.public_strategy = public_strategy
+
+        # todo make implementation here
+
+
+def calculate_nash(government_payoffs, public_payoffs):
     # game(players,structure,plays,optimal)
-    Game = game(('Government', 'Public'), [GovernmentPayoffs, PublicPayoffs], None)
+    game = Game(('Government', 'Public'), [government_payoffs, public_payoffs], None)
     # player(name,order,strategySpace,payoffs,choice,suboptimal,strategies,state,gameplay):
-    PlayerA = player('Government', (1, 0), [], [], None, [], None, [0, 0], [])
-    PlayerB = player('Public', (0, 1), [], [], None, [], None, [0, 0], [])
-    Players = [PlayerA, PlayerB]
-    for i in range(0, len(Players)):
-        Players[i].processGame(Game.structure)
-        Players[i].evaluate()
+    player1 = Player('Government', (1, 0), [], [], None, [], None, [0, 0], [])
+    player2 = Player('Public', (0, 1), [], [], None, [], None, [0, 0], [])
+    players = [player1, player2]
+    for i in range(0, len(players)):
+        players[i].process_game(game.structure)
+        players[i].evaluate()
     GP = []
-    for i in range(0, len(Players)):
-        X = Players[i].gameplay
+    for i in range(0, len(players)):
+        X = players[i].game_play
         GP = GP + [X]
-    Game.Nash(GP)
+    game.nash(GP)
 
 
+def time_scales_game(request, government_payoffs,
+                     public_payoffs):
+    government_period = request.get(globalConstants.GOVERNMENT_TIME_PERIOD)
+    public_period = request.get(globalConstants.PUBLIC_TIME_PERIOD)
+    government_strategy = request.get(globalConstants.GOVERNMENT_SCALAR_STRATEGY)
+    public_strategy = request.get(globalConstants.PUBLIC_SCALAR_STRATEGY)
+
+    game = TimeScaleGame(('Government', 'Public'), [government_payoffs, public_payoffs], None, government_period,
+                         public_period, government_strategy, public_strategy)
