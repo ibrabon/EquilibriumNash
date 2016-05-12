@@ -1,7 +1,7 @@
 import nash
 import util
 
-ClientInput = util.Util.fromFileToMap(util.Util.parse().filePath)
+ClientInput = util.fromFileToMap(util.parse().filePath)
 
 GovernmentPayoffs = ['Government',
                      ('L', 'L', 0),
@@ -16,7 +16,7 @@ PublicPayoffs = ['Public',
 
 nash.calculate_nash(GovernmentPayoffs, PublicPayoffs)
 
-for i in range(0, int(util.Util.parse().iterations)):
+for i in range(0, int(util.parse().iterations)):
     nash.time_scales_game(ClientInput, GovernmentPayoffs, PublicPayoffs)
 
 print(" ")
