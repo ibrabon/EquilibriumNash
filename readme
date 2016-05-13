@@ -1,0 +1,3 @@
+to start app execute entryPoint
+-f income filepath
+-i number of iterations

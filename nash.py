@@ -170,4 +170,5 @@ def time_scales_game(request, government_payoffs,
 
     game = TimeScaleGame(('Government', 'Public'), [government_payoffs, public_payoffs], None, int(government_period),
                          int(public_period), government_strategy, public_strategy)
-    print(game.play())
+    return game.play()
+
