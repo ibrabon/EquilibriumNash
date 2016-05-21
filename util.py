@@ -1,8 +1,9 @@
 import argparse
 import os
-import scipy.stats.stats as st
+import re
 
 import matplotlib.pyplot as plt
+import scipy.stats.stats as st
 from numpy import std
 
 
@@ -10,7 +11,8 @@ def fromFileToMap(filePath):
     newDict = {}
     with open(filePath) as f:
         for line in f:
-            splitLine = line.split()
+            line = re.split("#", line)
+            splitLine = line[0].split()
             newDict[splitLine[0]] = ",".join(splitLine[1:])
     return newDict
 
@@ -49,8 +51,8 @@ def make_histogramm(array, player_name, path):
 def make_all_calculations(array, player_name, file):
     file.write(str(player_name + "'s average = " + str(float(sum(array)) / len(array)) + "\n"))
     file.write(str(player_name + "'s standard deviation = " + str(std(array)) + "\n"))
-    # file.write(str(player_name + "'s asymmetry = " + str(st.skew(array, bias=False)) + "\n"))
-    # file.write(str(player_name + "'s excess = " + str(st.kurtosis(array, bias=False)) + "\n"))
+    file.write(str(player_name + "'s asymmetry = " + str(st.skew(array, bias=False)) + "\n"))
+    file.write(str(player_name + "'s excess = " + str(st.kurtosis(array, bias=False)) + "\n"))
 
 
 def create_all_stats(array, player_name, time):

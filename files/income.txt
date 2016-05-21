@@ -1,4 +1,4 @@
-rg 4
-qg 0.5 0.9 0.7 0.4
-rp 3
-qp 0.6 0.8 1
+rg 4 # government's amount of moves during the game
+qg 0.5 0.9 0.7 0.4 # the value of the governmental probability function of the adoption of the H strategy [0;1]
+rp 3  # public's amount of moves during the game
+qp 0.6 0.8 1  # the value of the public probability function of the adoption of the H strategy [0;1]

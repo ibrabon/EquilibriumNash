@@ -1,3 +1,8 @@
 to start app execute entryPoint
 -f income filepath
 -i number of iterations
+
+Environment:
+Python 3.4
+numpy-1.11.0+mkl-cp34-cp34m
+scipy-0.17.1-cp34-cp34m
