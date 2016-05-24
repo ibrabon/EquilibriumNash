@@ -1,1 +1,33 @@
 \section{Программная реализация} 
+
+\subsection{Информация о программе}
+В рамках дипломной работы была разработана программа, которая эмулирует биматричную игру на временных шкалах и доказывает эмпирически изложенные в работе результаты. 
+\\
+
+Разработка программного продукта велась на языке Python 3.4.
+Программа позваляет пользователю задать $r^g$, $r^p$ и соответсвующие скалярные функции поведения игрока в определенный момент времени. Значениями данной функции будет вероятность выбора игроком  стратегии $H$ в данный период времени. Так же пользователь может задать количество запусков игры с входящими данными для подсчета статистики. В качетсве интерфейса входящих данных был выбран txt файл.
+
+\subsection{Пояснения к коду}
+ \begin{lstlisting}[style=csharpinlinestyle]
+	 util.fromFileToMap(filepath) 
+ \end{lstlisting}
+Функция парсит входящие данных
+
+ \begin{lstlisting}[style=csharpinlinestyle]
+	 nash.calculate_nash(government_payoffs, public_payoffs)
+ \end{lstlisting}
+ Функция рассчитывает равновесие по Нэшу для стандартной игры.
+ 
+ 
+ \begin{lstlisting}[style=csharpinlinestyle]
+	 nash.time_scales_game(request, government_payoffs, public_payoffs))
+ \end{lstlisting}
+ Имитация игры на временных шкалах, результатом который есть вектор выигрышей игроков за время игры
+ 
+  \begin{lstlisting}[style=csharpinlinestyle]
+	  util.create_all_stats(array, player_name, time)
+  \end{lstlisting}
+ Рассчитывает статистические параметры, строит гистограму для выигрышей одного игрока.
+ 
+ \subsection{Листинг}
+ https://github.com/ibrabon/EquilibriumNash/

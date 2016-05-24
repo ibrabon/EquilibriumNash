@@ -18,3 +18,29 @@ T_g = \{0,r^g,2r^g,...,T\}, T_p=\{0,r^p,2r^p,...,T\}, T=T_g\cup T_p
 \end{equation}
 
 Главным преимуществом использования однородных временных шкал это экономическая интерпретация: $r^g$ и $r^p$ представляют собой степень приверженности (???) правительства и степень жесткости поднятия заработных плат общественности (????).
+\\
+
+Ассинхронная игра на временных шкалах будет иметь несколько равновесий по Нэшу, среди которых мы выберем лучшую в зависимости от подыгры.
+
+\begin{theorem}
+	Рассмотрим общую несогласованную по времени игру на однородных временных шкалах, для которой выполняются~(\ref{eq:sec:ot:constraint}) и ~(\ref{eq:sec:tech:scales}). Тогда все SNPE игры будут Ramsey SNPE, если и только если
+	
+	\begin{equation}
+		\label{eq:sec:tech:theoremSystem}
+		r^g> \bar{r^g}(R) = \left\{ 
+		\begin{aligned} 
+			&\frac{c - d}{a-d}r^p= \frac{a-b}{a-d}r^p, &&\text{если } R=0
+			\\
+			&\frac{(1+R)(c-d)}{a-d}r^p= \frac{a-b + R(c-d)}{a-d}r^p, &&\text{если } 	R\in(0; \bar{R})
+			\\
+			&\frac{c-d-(1-R)(a-b)}{a-d}r^p= \frac{(a-b)}{a-d}Rr^p, &&\text{если } 	R\in(\bar{R};1)
+		\end{aligned}
+		\right.		
+	\end{equation}
+\end{theorem}
+, где $\bar{R}=\frac{q-v}{z-x+q-v}$. В несогласованной игре, где справедливо ~(\ref{eq:sec:ot:constraint}),  ~(\ref{eq:sec:tech:theoremSystem}) преобразуется в 
+
+\begin{equation}
+	\frac{r^g}{r^p} \in \left(\frac{3}{2}, 2\right)\cup \left(\frac{5}{2}, \infty\right)
+\end{equation}
+докозательство: ссылка на Либиха и Штелика или копия оттуда.
