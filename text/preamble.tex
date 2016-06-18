@@ -97,10 +97,6 @@
 \setlength{\cftbeforetoctitleskip}{-1em}
 \setlength{\cftaftertoctitleskip}{1em}
 
-
-
-
-
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
@@ -117,8 +113,11 @@
 % Зачем: Определяет отступы слева для записей в таблице содержания.
 % Почему: Пункт 2.2.7 Требований по оформлению пояснительной записки.
 \makeatletter
-\renewcommand{\l@section}{\@dottedtocline{1}{0.5em}{1.2em}}
-\renewcommand{\l@subsection}{\@dottedtocline{2}{1.7em}{2.0em}}
+\renewcommand{\l@section}{\@dottedtocline{1}{0.5em}{4.5em}}
+\renewcommand{\l@subsection}{\@dottedtocline{2}{1.4em}{2.0em}}
+\renewcommand{\thesection}{Раздел \arabic{section}}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+
 \makeatother
 
 % Зачем: Задает стиль заголовков раздела жирным шрифтом, прописными буквами, без точки в конце
@@ -423,3 +422,4 @@
 % Тире в словае заменяем на \hyph: аппаратно\hyphпрограммный.
 % https://stackoverflow.com/questions/2193307/how-to-get-latex-to-hyphenate-a-word-that-contains-a-dash#
 \def\hyph{-\penalty0\hskip0pt\relax}
+
