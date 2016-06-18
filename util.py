@@ -39,7 +39,7 @@ def add(x, y):
 
 
 def make_histogramm(array, player_name, path):
-    plt.hist(array)
+    plt.hist(array, histtype='step')
     file_name = str(player_name) + ".png"
     try:
         os.mkdir(path, mode=0o777)
