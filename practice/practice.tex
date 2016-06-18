@@ -1,0 +1,348 @@
+\documentclass {beamer}	
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{multimedia}
+\usepackage[T2A]{fontenc}
+\usepackage[UTF8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+\usetheme{PaloAlto}
+\usefonttheme{structureitalicserif}
+\title{ "Теория игр на временных шкалах"}
+\author {Выполнил: Бондаренко Алексей \\Научный руководитель: Огуленко А.П.}
+\date{}
+
+
+\begin{document}
+
+\begin{frame}
+\maketitle
+\end{frame}
+
+\begin{frame}
+\section{Постановка задания}
+\frametitle{Постановка задания}
+Разобрать модель правительство-общественость Либиха и Штекеля. Реализовать программу эммулирующую ход игры на временных шкалах. 
+Перенести на временные шкалы модель профсоюза-монополиста. 
+\end{frame}
+
+\begin{frame}
+	\section{Барро-Гордона}
+\frametitle{Постановка классической задачи}
+В игре участвуют два игрока: $p$ - правительство, $q$ - общественность, которые оперируют инфляцией $\pi$  и индексированием заработной платы $\omega$ соответственно. Каждый игрок выбирает из следующих стратегий: низким $L$  и высоким  $H$ уровнем повышения.
+\end{frame}
+
+\begin{frame}
+\frametitle{Постановка классической задачи}
+В общем виде игра может быть задана в виде матрицы выигрышей
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{first}
+\end{figure}
+  где параметры $a,b,c,d,q,v,x,z$  - выигрыши удовлетворяющие следующим ограничениям
+
+$$
+c>a>d>b, q>v, q\ge z>x.
+$$
+\end{frame}
+
+\begin{frame}
+\frametitle{Идея решения}
+Экономику зададим через функцию совокупного предложения Лукаса
+$$y_t - Y = \lambda(\pi_t - \omega_t)+\varepsilon_t,$$
+где  $\lambda>0, y$  – производительность, $Y$ – естественный уровень производительности, а  $\varepsilon$ - макроэкономический шок близкий к нулю.
+Функции полезности: 
+$$ u^g_t=-(\pi_t - \tilde{\pi})^2 + \alpha y_t - \beta(y_t-Y)^2,$$
+$$ u^p_t=-(\pi_t - \omega)^2,$$
+
+где $\tilde{\pi}$ - оптимальный уровень инфляции, а $\alpha > 0, \beta > 0$ описывают относительный вес целей правительствa.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Идея решения}
+Было получено равновесие 
+$$ \pi^*_t= \tilde{\pi} + \frac{\alpha\lambda}{2}= \omega^*_t,$$ 
+Ли и Чао предлагают два наиболее оптимальных варианта 
+$$\pi \in \left\{L=\tilde{\pi}, H=\tilde{\pi}+\frac{\alpha\lambda}{2} \right\} \ni $$
+В связи с чем были выведены следующие соотношения между выигрышами:
+\begin{equation}
+\label{eq:sec:ot:constraint}
+c>a=0 > d > b,c=-d=-\frac{b}{2}, q>v,q\ge z>x
+\end{equation}
+\end{frame}
+
+\begin{frame}
+\frametitle{Идея решения}
+Положим в соответствии с имеющимися ограничениями
+$$c=1 > a=0 > d=-1 > b=-2, q=z=0 > v=x=-1,$$
+  \begin{center}
+  	\includegraphics[width=0.5\textwidth]{second}
+  \end{center}
+  
+  Стандартная пошаговая игра имеет уникальное равновесие по Нэшу $(H,H)$. Однако, оно неэффективно, так как является Парето доминированным.
+  Парето-оптимальным будет  $(L,L)$
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Игра на временных шкалах для модели Барро-Гордона}
+\begin{enumerate}
+\item
+ игра начинается одновременным ходом
+ \item
+ заранее известно незименное количество ходов $r^g \in \mathbb{N}$ и $r^p \in \mathbb{N}$
+ \item игра заканчивается через $T$ периодов, где $T$ - наименьшее общее кратное для $r^g$ и $r^p$
+ \item
+ игроки рациональны, обладают равноценными знаниями и полной информацией о структуре игры, матрице выигрышей и всех предыдущих ходах
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Игра на временных шкалах для модели Барро-Гордона}
+	Определяется три временных шкалы: правительства, общественности и самой игры:
+	\begin{equation}
+	\label{eq:sec:tech:scales}
+	T_g = \{0,r^g,2r^g,...,T\}, T_p=\{0,r^p,2r^p,...,T\}, T=T_g\cup T_p 
+	\end{equation}
+	
+	Ассинхронная игра на временных шкалах будет как правило иметь несколько равновесий по Нэшу, среди которых мы выберем лучшую в зависимости от под-игры
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Имитация}
+	\begin{theorem}
+	\small	Рассмотрим общую несогласованную по времени игру на однородных временных шкалах, для которой выполняются~(\ref{eq:sec:ot:constraint}) и ~(\ref{eq:sec:tech:scales}). Тогда все SNPE игры будут SNPE Рамси, если и только если
+		{\scriptsize
+		\begin{equation}
+		\label{eq:sec:tech:theoremSystem}
+		r^g> \bar{r^g}(R) = \left\{ 
+		\begin{aligned} 
+		&\frac{c - d}{a-d}r^p= \frac{a-b}{a-d}r^p, &&\text{если } R=0
+		\\
+		&\frac{(1+R)(c-d)}{a-d}r^p= \frac{a-b + R(c-d)}{a-d}r^p, &&\text{если } 	R\in(0; \bar{R})
+		\\
+		&\frac{c-d-(1-R)(a-b)}{a-d}r^p= \frac{(a-b)}{a-d}Rr^p, &&\text{если } 	R\in(\bar{R};1)
+		\end{aligned}
+		\right.		
+		\end{equation}
+	}
+
+	где $\bar{R}=\frac{q-v}{z-x+q-v}$. В несогласованной игре   ~(\ref{eq:sec:tech:theoremSystem}) преобразуется в 
+	
+	\begin{equation}
+	\frac{r^g}{r^p} \in \left(\frac{3}{2}, 2\right)\cup \left(\frac{5}{2}, \infty\right)
+	\end{equation}
+	\end{theorem}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Имитация игры}
+	$r^g= 4 $ - количество ходов совершаемое  правительством за игру\\
+	$r^p= 3 $ - количество ходов совершаемое  обществом за игру\\
+	Рассмотрим случай, когда правительство скорее склонно ввести высокий уровень инфляции, а общественность предполагая, что правительство пойдет на этот шаг с высокой долей вероятности поднимет зарплаты:
+	
+	$q^g =[ 0.5; 0.9; 0.7; 0.4 ]$ - соответсвующая скалярная функция \\
+	$q^p=[ 0.6; 0.8; 1] $ - соответсвующая скалярная функция \\
+	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Имитация игры}
+	 \begin{center}
+	 	\includegraphics[width=0.50\textwidth]{Government1}
+	 \end{center}
+ \begin{center}
+ 	\includegraphics[width=0.50\textwidth]{third}
+ \end{center}
+
+%Согласно полученным результам легко видеть, что подобный набор стратегий невыгоден обеим сторонам, к тому же правительству из-за более "мягкого" подхода "более невыгодно".
+\end{frame}
+
+\begin{frame}
+	\frametitle{Имитация игры}
+	$r^g= 4 $ - количество ходов совершаемое  правительством за игру\\
+	$r^p= 3 $ - количество ходов совершаемое  обществом за игру\\
+	Рассмотрим случай, когда правительство всегда будет выбирать низкий уровень инфляции, тогда общественности не будет смысла поднимать зарплаты, то есть всегда будут выбирать стратегию L:
+	
+	$q^g =[ 0; 0; 0; 0 ]$ - соответсвующая скалярная функция \\
+	$q^p=[ 0; 0; 0] $- соответсвующая скалярная функция \\
+	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Имитация игры}
+	\begin{center}
+		\includegraphics[width=0.50\textwidth]{forth}
+	\end{center}
+	
+
+	\begin{center}
+		\includegraphics[width=0.50\textwidth]{fifth}
+	\end{center}
+	
+%Данная стратегия является Парето-оптимальной, игрокам нет смысла отклоняться от неё в долгосрочной перспективе.
+\end{frame}
+
+
+
+\begin{frame}
+	\section{Профсоюз-монополист}
+\frametitle{Постановка классической задачи}
+Данная модель является моделью отношений профсоюз-фирма, в которой профсоюз задаёт уровень заработной платы $W$, после чего фирма выбирает желаемое количество наёмных работников  $E$ (уровень найма).
+
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Постановка классической задачи}
+Функция полезности профсоюза имеет вид 
+$$ U = U(W,E), \quad \frac{\partial U}{\partial W} > 0; \quad \frac{\partial U}{\partial E}~>~0.$$ 
+Например $U = \lambda WE$, где $\lambda \in (0; 1)$\\
+Полезность для фирмы измеряется как прибыль 
+$$\Pi~=~PY(\bar K,E)~-~WE,$$ 
+где цена $P$ дана, а капитал $\bar K$ фиксирован. Отсюда мы можем переписать 
+$$\Pi(W,E)~=~R(E)~-~WE,$$ 
+где $R$ -- доход.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Решение классической задачи}
+	
+	Фирма максимизирует свою прибыль по $E$ при заданном уровне заработной платы. Условие первого порядка примет вид
+	$$ W = R'(E) = MPE. $$
+	Разрешая относительно $E$ получим кривую спроса: $$E~=~g(W)$$.\\
+	Решается
+	$$ \max_W U(W,E) = U(W,g(W)). $$
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Решение классической задачи}
+
+ \begin{center}
+ 	\includegraphics[width=0.8\textwidth]{monopoly_union}
+ \end{center}
+ Точка $X$ -- точка равновесия.\\
+ $AB$ -- кривая контракта, состоящая из точек, в которых изопрофиты и кривые безразличия профсоюза имеют общий тангенс
+\end{frame}
+
+\begin{frame}
+	
+	\frametitle{Детерменированная модель}
+	
+	В игре, как и в непрерывной модели присутсвует два игрока: профсоюз $P$ и фирма $F$, чьими рычагами влияния на игру являются $W$ - зарплата рабочего и $E$ - количество нанятых рабочих соответственно.
+	Каждый игрок выбирает из следующих стратегий: низким $L$ и высоким $H$ уровнем повышения.
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{sixth}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}
+	
+	\frametitle{Детерменированная модель}
+	Функция полезности профсоюза  $U_t(W,E)=\lambda WE$, где $\lambda \in(0;1)$:
+	$$\frac{\partial U}{\partial W} > 0; \quad \frac{\partial U}{\partial E}~>~0 \quad U(0,E)=U(W,0)=U(0,0)=0,$$
+	
+	Функция полезности фирмы $\Pi_t(W,E)=cP(\bar{K},E)-WE$:
+	$$P(\bar{K}, E)=A\bar{K}^\alpha E^\beta,$$ где $A$ – коэффициент нейтрального технического прогресса, $\alpha$ и $\beta$ – коэффициенты эластичности валового внутреннего продукта по капитальным и трудовым затратам.\\
+\end{frame}
+
+\begin{frame}
+	\frametitle{Решение модели}
+	Были получены следующие результаты соотношения между функциями полезности:
+		$$U(L,L) < U(L,H) \le U(H, L) < U(H,H) $$
+		$$\Pi(L,H) > \Pi(L,L) > \Pi(H, L) > \Pi(H,H) $$
+	Пусть матрица выигрышей имеет следующий вид:
+	
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{seventh}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Имитация}
+	$r^g= 5 $ - количество ходов совершаемое фирмой за игру\\
+	$r^p= 3 $ - количество ходов совершаемое профсоюзом за игру\\
+	Рассмотрим случай, когда профсоюз скорее выберет высокий уровень зарплаты, а фирма наймет скорее меньше людей:
+	
+	$q^g =[ 0.2; 0.4; 0.3; 0.2; 0.1]$ - соответсвующая скалярная функция \\
+	$q^p=[0.7; 0.6; 0.8] $ - соответсвующая скалярная функция \\
+	
+
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Имитация}
+		\begin{center}
+			\includegraphics[width=0.5\textwidth]{firm1}
+		\end{center}
+	\begin{table}[]
+		\centering
+		\begin{tabular}{|l|l|l|}
+			\hline
+			& Firm   & \multicolumn{1}{c|}{Union} \\ \hline
+			average                                                       & 50.66  & 37.6                       \\ \hline
+			\begin{tabular}[c]{@{}l@{}}standard \\ deviation\end{tabular} & 13.27  & 13.96                      \\ \hline
+			asymmetry                                                     & -0.06  & 0.302                      \\ \hline
+			excess                                                        & -0.277 & 0.101                      \\ \hline
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Имитация}
+	$r^g= 5 $ - количество ходов совершаемое фирмой за игру\\
+	$r^p= 3 $ - количество ходов совершаемое профсоюзом за игру\\
+	Рассмотрим случай, когда профсоюз скорее выберет низкий уровень зарплаты, а фирма наймет большое количество людей:
+	
+	$q^g =[ 0.7 0.6 0.8 0.7 0.6]$ - соответсвующая скалярная функция \\
+	$q^p=[0.2 0.4 0.3] $ - соответсвующая скалярная функция \\
+	
+	
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Имитация}
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{eigth}
+	\end{center}
+	\begin{table}[]
+		\centering
+		\begin{tabular}{|l|l|l|}
+			\hline
+			& Firm   & \multicolumn{1}{c|}{Union} \\ \hline
+			average                                                       & 27.46  & 48.14                       \\ \hline
+			\begin{tabular}[c]{@{}l@{}}standard \\ deviation\end{tabular} & 11.93  & 17.37                      \\ \hline
+			asymmetry                                                     & 0.24  &  0.177                      \\ \hline
+			excess                                                        & 1.92 & -0.085                      \\ \hline
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+
+
+\begin{frame}
+	\frametitle{Имитация}
+	В этой игре нет парето-оптимального набора стратегий.
+	\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Конечный этап}
+\section{Конечный этап}
+Спасибо за внимание!\\
+\end{frame}
+
+\end{document}

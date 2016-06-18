@@ -1,4 +1,5 @@
-\section{Основные определения}
+\section{Основные понятия и определения}
+\subsection{Элементы теории игр}
 
 \begin{definition}	$(S,H)$— не кооперативная игра $n$ лиц в нормальной форме, где $S$ — набор чистых стратегий, а $H$ — набор выигрышей. Когда каждый игрок $i \in \left\{1,...,n\right\}$  выбирает стратегию $x_i \in S$  в профиле стратегий $x=(x_1,...,x_n)$, игрок $i$  получает выигрыш $H_i(x)$. Профиль стратегий $x^* \in S$   является равновесием по Нэшу, если изменение своей стратегии с $x_i^*$  на $x_i$  не выгодно ни одному игроку $i$, то есть $\forall i : H_i(x^*) \ge H_i(x_i, x_{-i}^*)$.
 \end{definition}
@@ -21,4 +22,75 @@
 
 \begin{definition}
 	Любое совершенное равновесие по под-играм (SPNE), в котором оба игрока выбирают стратегию L во всех своих ходах, назовём \textbf{совершенным равновесием Рамсея по под-играм (Ramsey SPNE)}
+\end{definition}
+
+\subsection{Элементы анализа на временных шкалах}
+\begin{definition}
+	Под временной шкалой понимается непустое замкнутое подмножество множества
+	вещественных чисел, она обозначается символом $\mathbb{T}$.
+	Свойства временной шкалы определяются тремя функциями:
+	\begin{itemize}
+		\item[1)] оператор перехода вперед:
+		\[
+		\sigma(t) = \inf\left\{s \in \mathbb{T}: s > t\right\};
+		\]
+		\item[2)] оператор перехода назад:
+		\[
+		\rho(t) = \sup\left\{s \in \mathbb{T}: s < t\right\},
+		\]
+		(при этом полагается $\inf\varnothing = \sup{\mathbb{T}}$ и $\sup\varnothing = \inf{\mathbb{T}}$);
+		\item[3)] функция зернистости
+		$$\mu(t) = \sigma(t) - t.$$
+	\end{itemize}
+\end{definition}
+Поведение операторов перехода вперед и назад в конкретной точке временной шкалы
+определяет тип этой точки. Соответствующая классификация точек представлена в
+таблице~(\ref{tab:pointclass}).
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{|l|l|}
+			\hline
+			$t$ справа рассеянная & $t < \sigma(t)$ \\
+			$t$ справа плотная    & $t = \sigma(t)$ \\
+			$t$ слева рассеянная  & $ \rho(t) < t $ \\
+			$t$ слева плотная     & $ \rho(t) = t $ \\
+			$t$ изолированная      & $\rho(t) < t < \sigma(t)$ \\
+			$t$ плотная           & $\rho(t) = t = \sigma(t)$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Классификация точек временной шкалы}		
+	
+	\label{tab:pointclass}
+\end{table}
+
+\begin{definition}
+	 Множество $\mathbb{T}^\kappa$ определим как:
+	 \[
+	 \mathbb{T}^\kappa =
+	 \begin{cases}
+	 \mathbb{T}\setminus \left\{M\right\}, & \text{ если }
+	 \exists \text{ справа рассеянная точка } M \in \mathbb{T}:\\
+	 & M = \sup\mathbb{T}, \sup\mathbb{T}<\infty  \\
+	 \mathbb{T} , & \text{ в противном случае}.
+	 \end{cases}
+	 \]
+	 Далее полагаем $\left[a, b\right] =
+	 \left\{t \in \mathbb{T} : a \leqslant t \leqslant b\right\}$.
+\end{definition}
+
+\begin{definition}
+	$\delta$-разбиение отрезка временной шкалы $[t_0, t_f]$
+	определим следующим образом: задавшись диаметром разбиения
+	$\delta$, положим первую точку разбиения равной $t_0$, а
+	дальнейшие точки определим по формуле
+	\[
+	t_i = \left\{
+	\begin{aligned}
+	\sup{\left(t_{i-1}, t_{i-1}+\delta\right]}&, \qquad
+	\text{если}\quad t_{i-1}+ \delta \in \mathbb{T}^\kappa, \\
+	\sigma(t_{i-1}) &, \qquad \text{если}\quad t_{i-1}+\delta \notin \mathbb{T}^\kappa.
+	\end{aligned}
+	\right.
+	\]
 \end{definition}
