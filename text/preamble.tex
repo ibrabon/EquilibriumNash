@@ -42,7 +42,7 @@
 
 % Зачем: Настраивает отступы от границ страницы.
 % Почему: Пункт 2.1.2 Требований по оформлению пояснительной записки.
-\usepackage[left=3cm,top=2.0cm,right=1.5cm,bottom=2.7cm]{geometry}
+\usepackage[left=3cm,top=2.0cm,right=1cm,bottom=2.0cm]{geometry}
 
 
 % Зачем: Настраивает межстрочный интервал, для размещения 40 +/- 3 строки текста на странице.
@@ -82,7 +82,8 @@
 
 % Зачем: Переопределяем стандартную нумерацию, т.к. в отчете будут только section и т.д. в терминологии TeX
 \makeatletter
-\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesection}{Раздел \arabic{section} }
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
 \makeatother
 
 
@@ -114,9 +115,7 @@
 % Почему: Пункт 2.2.7 Требований по оформлению пояснительной записки.
 \makeatletter
 \renewcommand{\l@section}{\@dottedtocline{1}{0.5em}{4.5em}}
-\renewcommand{\l@subsection}{\@dottedtocline{2}{1.4em}{2.0em}}
-\renewcommand{\thesection}{Раздел \arabic{section}}
-\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\renewcommand{\l@subsection}{\@dottedtocline{2}{2.0em}{2.2em}}
 
 \makeatother
 
@@ -267,13 +266,16 @@
 \setlist[enumerate,2]{itemindent=\parindent + \parindent - 2.7ex}
 
 % Зачем: Включение номера раздела в номер формулы. Нумерация формул внутри раздела.
-\AtBeginDocument{\numberwithin{equation}{section}}
+\newcounter{forsec}
+\setcounter{forsec}{1}
+
+\AtBeginDocument{\numberwithin{equation}{forsec}}
 
 % Зачем: Включение номера раздела в номер таблицы. Нумерация таблиц внутри раздела.
-\AtBeginDocument{\numberwithin{table}{section}}
+\AtBeginDocument{\numberwithin{table}{forsec}}
 
 % Зачем: Включение номера раздела в номер рисунка. Нумерация рисунков внутри раздела.
-\AtBeginDocument{\numberwithin{figure}{section}}
+\AtBeginDocument{\numberwithin{figure}{forsec}}
 
 
 % Зачем: Дополнительные возможности в форматировании таблиц
