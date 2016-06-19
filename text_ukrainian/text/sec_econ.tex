@@ -1,0 +1,150 @@
+\section{Основні поняття і визначення}
+\subsection{Елементи теорії ігор}
+
+\begin{definition}
+	$(S,H)$ --- не кооперативна гра $n$осіб в нормальній
+	формі, де $S$ --- набір чистих стратегій, а $H$ --- набір виграшів. Коли кожен гравець $i \in \left\{1,\dots,n\right\}$ вибирає стратегію $x_i
+	\in S$ в профілі стратегій $x=(x_1,\dots,x_n)$, iгрок $i$ отримує
+	виграш $H_i(x)$. Профіль стратегій $x^* \in S$ є рівновагою
+	Неша, якщо зміна своєї стратегії з $x_i^*$  на $x_i$ невигідно жодному гравцю  $i$, тобто $\forall i : H_i(x^*) \geqslant H_i(x_i,
+	x_{-i}^*)$.
+\end{definition}
+	
+\begin{definition}
+Рівновага Неша називається бездоганною по під-іграм, якщо і тільки якщо вона
+є рівновагою Неша для кожної під-iгри.
+\end{definition}
+
+\begin{definition}
+Парето-оптимальність в сенсі теорії ігор характеризує таку ситуацію, при якій неможливо поліпшити результат гри для одного гравця без його погіршення для інших гравців.
+\end{definition}
+
+\begin{definition}
+Інфляція --- підвищення загального рівня цін на товари і послуги.
+\end{definition}
+
+\begin{definition}
+Індексація заробітної плати --- підвищення заробітних плат з метою часткової захисту населення від зростання споживчих цін на товари та послуги.\end{definition}
+
+\begin{definition}
+	Будь-яку досконалу рівновагу на під-іграх (SPNE), 
+	 в якому обидва гравці вибирають стратегію L у всіх своїх ходах, назвемо \textbf {досконалою рівновагою Рамсея на під-іграх (Ramsey SPNE)}~\cite{libich2008macroeconomic}
+\end{definition}
+
+\subsection{Елементи аналізу на часових шкалах}
+
+Відомості з теорії часових шкал наводяться слідуючи двом основним
+джерелами\cite{Bohner,BohnerAdv}.
+
+\begin{definition}
+Під часовою шкалою розуміється непорожня замкнута підмножина безлічі
+дійсних чисел, вона позначається символом $\mathbb{T}$.
+Властивості часової шкали визначаються трьома функціями:	
+\begin{itemize}
+		\item[1)] оператор переходу вперед:
+		\[
+		\sigma(t) = \inf\left\{s \in \mathbb{T}: s > t\right\};
+		\]
+		\item[2)] оператор перехода назад:
+		\[
+		\rho(t) = \sup\left\{s \in \mathbb{T}: s < t\right\},
+		\]
+		(при цьому покладається  $\inf\varnothing = \sup{\mathbb{T}}$ і $\sup\varnothing = \inf{\mathbb{T}}$);
+		\item[3)]функція зернистості
+		$$\mu(t) = \sigma(t) - t.$$
+	\end{itemize}
+\end{definition}
+Поведінка операторів переходу вперед і назад в конкретній точці на шкалі часу
+визначає тип цієї точки. Відповідна класифікація точок представлена в
+таблиці~(\ref{tab:pointclass}).
+\begin{table}[h]
+
+	\centering		
+		\caption{}	Класифікація точок на шкалі часу\\
+		\begin{tabular}{|l|l|}
+			\hline
+			$t$ праворуч розсіяна & $t < \sigma(t)$ \\
+			$t$ праворуч щільна    & $t = \sigma(t)$ \\
+			$t$ зліва розсіяна  & $ \rho(t) < t $ \\
+			$t$ зліва щільна     & $ \rho(t) = t $ \\
+			$t$ ізольована      & $\rho(t) < t < \sigma(t)$ \\
+			$t$ щільна          & $\rho(t) = t = \sigma(t)$ \\
+			\hline
+		\end{tabular}
+	
+	\label{tab:pointclass}
+\end{table}
+
+\begin{definition}
+	 Множину $\mathbb{T}^\kappa$ визначимо як:
+	 \[
+	 \mathbb{T}^\kappa =
+	 \begin{cases}
+	 \mathbb{T}\setminus \left\{M\right\}, & \text{ якщо }
+	 \exists \text{ праворуч розсіяна точка } M \in \mathbb{T}:\\
+	 & M = \sup\mathbb{T}, \sup\mathbb{T}<\infty  \\
+	 \mathbb{T} , & \text{ в іншому випадку}.
+	 \end{cases}
+	 \]
+	 Далі вважаємо $\left[a, b\right] =
+	 \left\{t \in \mathbb{T} : a \leqslant t \leqslant b\right\}$.
+\end{definition}
+
+\begin{definition}
+    Нехай $f:\mathbb{T} \rightarrow \mathbb{R}$ и $t \in \mathbb{T}^\kappa$.
+    Число $f^{\Delta}(t)$ називається $\Delta$-похідною функції $f$ в точцi $t$,
+    якщо $\forall \varepsilon > 0$ знайдеться такий окiл
+    $U$ точки $t$ (тобто, $U = (t - \delta, t + \delta) \cap \mathbb{T}, \delta < 0$),
+    що
+    \[
+    \left|f(\sigma(t)) - f(s) - f^{\Delta}(t)(\sigma(t)-s)\right| \leqslant
+        \varepsilon\left|\sigma(t) - s\right| \quad \forall s \in U.
+    \]
+\end{definition}
+
+\begin{definition}
+    Якщо $f^{\Delta}(t)$ існує $\forall t \in \mathbb{T}^\kappa$,
+    то $f:\mathbb{T} \rightarrow \mathbb{R}$ називається $\Delta$-диференційованою
+    на $\mathbb{T}^\kappa$. Функція $f^{\Delta}(t): \mathbb{T}^\kappa \rightarrow \mathbb{R}$
+   називається дельта-похідною функції $f$ на $\mathbb{T}^\kappa$.
+\end{definition}
+
+Якщо $f$ диференційована в $t$, то
+\[
+    f(\sigma(t)) = f(t) + \mu(t)f^{\Delta}(t).
+\]
+
+\begin{definition}
+    Функція $f:\mathbb{T} \rightarrow \mathbb{R}$ називається регулярною, якщо у всіх щільних справа точках тимчасової шкали $\mathbb{T}$вона має кінцеві правобічнi границі, а у всіх зліва щільних точках вона має кінцеві лівобічні границі.
+\end{definition}
+
+\begin{definition}
+    Функція $f:\mathbb{T} \rightarrow \mathbb{R}$ називається $rd$-неперервною,
+   якщо в справа щільних точках вона неперервна, а в зліва щільних точках має кінцеві лівобічні границі. Множина таких функцій позначається
+    $C_{rd} = C_{rd}(\mathbb{T})$, а множина диференційованих функцій,
+    похідна яких $rd$-неперервна, позначається як
+    $C_{rd}^1 = C_{rd}^1(\mathbb{T})$.
+\end{definition}
+
+
+\begin{definition}
+Для будь-якої регулярної функції $f(t)$ існує функція $F$,
+диференційовна в областi $D$ така, що для усiх $t \in D$
+виконується рівність $$F^{\Delta}(t) = f(t).$$
+Ця функція називається перед-первісною для $f(t)$ і
+визначається вона неоднозначно.
+\end{definition}
+
+Невизначений інтеграл на часовій шкалі має вигляд:
+\[
+    \int{f(t) \Delta t} = F(t) + C,
+\]
+де $C$ --- довільна константа інтегрування, а$F(t)$ --- перед-первісна для $f(t)$.
+Далі, якщо для всіх $t \in \mathbb{T}^\kappa$ виконується $F^{\Delta}(t) =
+f(t)$, де $f:\mathbb{T}\rightarrow\mathbb{R}$ --- $rd$-неперервна функція, то
+$F(t)$ називається первісною функції $f(t)$. Якщо $t_0 \in \mathbb{T}$, то
+$\displaystyle F(t) = \int\limits_{t_0}^t{f(s) \Delta s}$ для усiх $t$.
+Визначений $\Delta$-інтеграл для будь-яких $r,s \in \mathbb{T}$ визначається як
+\[
+    \int\limits_r^s{f(t)\Delta t} = F(s) - F(r).
+\]
