@@ -189,12 +189,12 @@
 
 % Зачем: Задание подписей, разделителя и нумерации частей рисунков
 % Почему: Пункт 2.5.5 Требований по оформлению пояснительной записки.
-\DeclareCaptionLabelFormat{stbfigure}{Рисунок #2}
+\DeclareCaptionLabelFormat{stbfigure}{Рис #2}
 \DeclareCaptionLabelFormat{stbtable}{Таблица #2}
 \DeclareCaptionLabelSeparator{stb}{~--~}
 \captionsetup{labelsep=stb}
 \captionsetup[figure]{labelformat=stbfigure,justification=centering}
-\captionsetup[table]{labelformat=stbtable,justification=raggedright}
+\captionsetup[table]{labelformat=stbtable,justification=raggedleft}
 \renewcommand{\thesubfigure}{\asbuk{subfigure}}
 
 % Зачем: Окружения для оформления формул

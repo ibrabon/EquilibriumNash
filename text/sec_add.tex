@@ -31,9 +31,8 @@ util.create_all_stats(array, player_name, time)
 Рассчитывает статистические параметры, строит гистограмму для выигрышей одного игрока.
 
 
-\textbf{Листинг}
- \begin{itemize}
- \item entryPoint.py:
+\textbf{Листинг}\\
+ entryPoint.py:
   \begin{lstlisting}[style=fsharpstyle]
  from datetime import datetime
 import nash
@@ -69,7 +68,7 @@ util.create_all_stats(mat[1], 'Public', time)
 print(" ")
 
   \end{lstlisting}
- \item util.py
+  util.py
  \begin{lstlisting}[style=fsharpstyle]
 import argparse
 import os
@@ -136,8 +135,7 @@ def create_all_stats(array, player_name, time):
     make_all_calculations(array, player_name, file)
 
  \end{lstlisting}
-
-\item nash.py
+ nash.py
 
  \begin{lstlisting}[style=fsharpstyle]
 import math
@@ -316,4 +314,3 @@ def time_scales_game(request, government_payoffs,
 
 
  \end{lstlisting}
-\end{itemize}
