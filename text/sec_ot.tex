@@ -4,6 +4,9 @@
 В игре участвуют два игрока: $p$ - правительство, $q$ - общественность, которые оперируют инфляцией $\pi$  и индексированием заработной платы $\omega$ соответственно. Для упрощения модели положим, что оба не могут прогнозировать будущие. Каждый игрок выбирает из следующих стратегий: низким $L$  и высоким  $H$ уровнем повышения. В общем виде игра может быть задана в виде матрицы выигрышей, 
 \begin{table}[h]
 	\centering
+	\caption{}
+\footnotesize Матрица выигрышей в модели Барро-Гордона\\
+\normalsize
 \begin{tabular}{|l|l|c|c|}
 	\hline
 	\multicolumn{2}{|l|}{\multirow{2}{*}{}} & \multicolumn{2}{l|}{Общественность} \\ \cline{3-4} 
@@ -71,6 +74,8 @@ c=1 > a=0 > d=-1 > b=-2, q=z=0 > v=x=-1,
 	\centering
 	
 	\caption{}	
+	\footnotesize Матрица выигрышей из~(\ref{eq:sec:ot:exampleConstraint})\\
+	\normalsize
 \begin{tabular}{|l|l|c|c|}
 	\hline
 	\multicolumn{2}{|l|}{\multirow{2}{*}{}} & \multicolumn{2}{l|}{Общественность} \\ \cline{3-4} 
@@ -265,6 +270,9 @@ $F$, чьими рычагами влияния на игру являются $
 
 \begin{table}[h]
 	\centering
+	\caption{}
+		\footnotesize Матрица выигрышей для модели "профсоюз---монополист"\\
+		\normalsize
 	\begin{tabular}{|l|l|l|l|}
 		\hline
 		\multicolumn{2}{|l|}{\multirow{2}{*}{}} & \multicolumn{2}{l|}{Профсоюз} \\ \cline{3-4} 
@@ -272,6 +280,7 @@ $F$, чьими рычагами влияния на игру являются $
 		\multirow{2}{*}{Фирма}     & $L$     & $a,q$          & $b,v$          \\ \cline{2-4} 
 		& $H$     & $c,x$          & $d,z$          \\ \hline
 	\end{tabular}
+	\label{tab:mono:prof}
 \end{table}
 Функцию полезности профсоюза мы полагаем линейной: $U(W,E)=\lambda WE$, где $\lambda \in(0;1)$:
 $$
@@ -318,11 +327,14 @@ U(L,L) < U(L,H) \nsim U(H, L) < U(H,H).
 \begin{equation}
 \Pi(H,H)=g-f < \Pi(H,L)=k-l < \Pi(L, L)=k-m < \Pi(L,H)=g-h.
 \end{equation}
-Следовательно матрица выигрышей будет следующей:
+Следовательно матрица выигрышей~(\ref{tab:mono:prof}) будет следующей:
 \begin{table}[h]
 	
 	\centering
 	\caption{}
+		\footnotesize Матрица выигрышей для модели "профсоюз---монополист"\\
+		\normalsize
+
 \begin{tabular}{|l|l|c|c|}
 	\hline
 	\multicolumn{2}{|l|}{\multirow{2}{*}{}} & \multicolumn{2}{l|}{Профсоюз} \\ \cline{3-4} 
@@ -331,6 +343,5 @@ U(L,L) < U(L,H) \nsim U(H, L) < U(H,H).
 	& H   & c,x              & d,z              \\ \hline
 \end{tabular}
 	\label{table:firm}
-	
 \end{table}\\
 где $q < x \thickapprox v < z, 0 > d < b < a < c$.
