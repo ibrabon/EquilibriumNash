@@ -1,30 +1,29 @@
-\sectioncentered*{Приложение А}
-\addcontentsline{toc}{section}{Приложение А}
+\sectioncentered*{Додаток А}
+\addcontentsline{toc}{section}{Додаток А}
 
-\textbf{Пояснения к коду}
+\textbf{Пояснення до коду}
 \begin{lstlisting}[style=csharpinlinestyle]
 util.fromFileToMap(filepath) 
 \end{lstlisting}
-Функция парсит входящие данных
+Функція парсить вхідні дані
 
 \begin{lstlisting}[style=csharpinlinestyle]
 nash.calculate_nash(government_payoffs, public_payoffs)
 \end{lstlisting}
-Функция рассчитывает равновесие по Нэшу для стандартной игры.
+Функція розраховує рівновагу Неша для стандартної гри.
 
 
 \begin{lstlisting}[style=csharpinlinestyle]
 nash.time_scales_game(request, government_payoffs, public_payoffs))
 \end{lstlisting}
-Имитация игры на временных шкалах, результатом который есть вектор выигрышей игроков за время игры
+Імітація гри на тимчасових шкалах, результатом якої є вектор виграшів гравців за час гри
 
 \begin{lstlisting}[style=csharpinlinestyle]
 util.create_all_stats(array, player_name, time)
 \end{lstlisting}
-Рассчитывает статистические параметры, строит гистограмму для выигрышей одного игрока.
+Розраховує статистичні параметри, будує гістограму для виграшів одного гравця.
 
-
-\textbf{Листинг}\\
+\textbf{Лістинг}\\
  entryPoint.py:
   \begin{lstlisting}[style=fsharpstyle]
  from datetime import datetime
